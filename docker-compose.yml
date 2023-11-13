@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  fastapi:
+    build: ./FastAPI
+    ports:
+      - "8000:8000"
+    networks:
+      - titanik_app-network
+
+  streamlit:
+    build: ./Streamlit
+    ports:
+      - "8501:8501"
+    networks:
+      - titanik_app-network
+    depends_on:
+      - fastapi
+
+networks:
+  titanik_app-network:
+    driver: bridge
